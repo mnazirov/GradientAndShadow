@@ -10,10 +10,10 @@ import UIKit
 final class ViewController: UIViewController {
     
     private lazy var squareView: UIView = {
-        let square = UIView()
-        square.backgroundColor = .green
-        square.layer.cornerRadius = Appearance.squareCorner
-        return square
+        let squareView = UIView()
+        squareView.backgroundColor = .green
+        squareView.layer.cornerRadius = Appearance.Square.corner
+        return squareView
     }()
 
     override func viewDidLoad() {
@@ -29,6 +29,7 @@ private extension ViewController {
         view.backgroundColor = .white
         setupSubviews()
         setupConstraints()
+        setupShadow()
     }
     
     private func setupSubviews() { 
@@ -38,11 +39,20 @@ private extension ViewController {
     private func setupConstraints() {
         squareView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            squareView.widthAnchor.constraint(equalToConstant: Appearance.squareSize.width),
-            squareView.heightAnchor.constraint(equalToConstant: Appearance.squareSize.height),
-            squareView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: Appearance.squareInsets.left),
+            squareView.widthAnchor.constraint(equalToConstant: Appearance.Square.size.width),
+            squareView.heightAnchor.constraint(equalToConstant: Appearance.Square.size.height),
+            squareView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: Appearance.Square.insets.left),
             squareView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+    
+    private func setupShadow() {
+        squareView.layer.shadowColor = Appearance.Square.shadowColor
+        squareView.layer.shadowOpacity = Appearance.Square.shadowOpacity
+        squareView.layer.shadowOffset = Appearance.Square.shadowOffset
+        squareView.layer.shadowRadius = Appearance.Square.shadowRadius
+        squareView.layer.shouldRasterize = true
+        squareView.layer.masksToBounds = false
     }
 }
 
@@ -50,9 +60,15 @@ private extension ViewController {
 
 private extension ViewController {
     enum Appearance {
-        static let squareSize = CGSize(width: 100, height: 100)
-        static let squareInsets = UIEdgeInsets(top: 0, left: 100, bottom: 0, right: 0)
-        static let squareCorner = 13.0
+        enum Square {
+            static let size = CGSize(width: 100, height: 100)
+            static let insets = UIEdgeInsets(top: 0, left: 100, bottom: 0, right: 0)
+            static let corner = 13.0
+            static let shadowRadius = 8.0
+            static let shadowOffset = CGSize(width: 0, height: 10)
+            static let shadowOpacity: Float = 0.15
+            static let shadowColor = UIColor.black.cgColor
+        }
     }
 }
 
