@@ -1,7 +1,4 @@
 //
-//  SceneDelegate.swift
-//  GradientAndShadow
-//
 //  Created by Marat Nazirov on 01.11.2024.
 //
 
