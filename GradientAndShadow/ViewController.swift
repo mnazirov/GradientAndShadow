@@ -7,13 +7,50 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
+    
+    private lazy var squareView: UIView = {
+        let square = UIView()
+        square.backgroundColor = .green
+        return square
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        commonInit()
     }
+}
 
+// MARK: - Private methods
 
+private extension ViewController {
+    private func commonInit() {
+        view.backgroundColor = .white
+        setupSubviews()
+        setupConstraints()
+    }
+    
+    private func setupSubviews() { 
+        view.addSubview(squareView)
+    }
+    
+    private func setupConstraints() {
+        squareView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            squareView.widthAnchor.constraint(equalToConstant: Appearance.squareSize.width),
+            squareView.heightAnchor.constraint(equalToConstant: Appearance.squareSize.height),
+            squareView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: Appearance.squareInsets.left),
+            squareView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
+}
+
+// MARK: - Appearance
+
+private extension ViewController {
+    enum Appearance {
+        static let squareSize = CGSize(width: 100, height: 100)
+        static let squareInsets = UIEdgeInsets(top: 0, left: 100, bottom: 0, right: 0)
+    }
 }
 
