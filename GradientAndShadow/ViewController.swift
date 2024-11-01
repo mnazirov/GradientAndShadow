@@ -12,6 +12,7 @@ final class ViewController: UIViewController {
     private lazy var squareView: UIView = {
         let square = UIView()
         square.backgroundColor = .green
+        square.layer.cornerRadius = Appearance.squareCorner
         return square
     }()
 
@@ -51,6 +52,7 @@ private extension ViewController {
     enum Appearance {
         static let squareSize = CGSize(width: 100, height: 100)
         static let squareInsets = UIEdgeInsets(top: 0, left: 100, bottom: 0, right: 0)
+        static let squareCorner = 13.0
     }
 }
 
